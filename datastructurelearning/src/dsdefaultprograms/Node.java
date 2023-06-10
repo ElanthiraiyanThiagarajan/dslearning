@@ -12,13 +12,13 @@ public class Node {
   public Node left, right;
   public Integer key;
 
-  public Node(Integer value,Boolean isBinarySearchTree) {
+  public Node(Integer value, Boolean isBinarySearchTree) {
     this.key = value;
-    if(isBinarySearchTree){
+    if (isBinarySearchTree) {
       left = null;
       right = null;
     }
-    
+
   }
 
   /** Binary Search Tree fields Ends */

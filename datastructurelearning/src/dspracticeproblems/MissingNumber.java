@@ -18,6 +18,6 @@ public class MissingNumber {
     }
 
     public static void main(String[] args) {
-        missingNumber(new int[]{1,2,3,4,5,6,8,9});
+        missingNumber(new int[]{3,0,1});
     }
 }
