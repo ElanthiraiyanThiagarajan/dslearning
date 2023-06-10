@@ -27,32 +27,32 @@ public class RunLength {
         String s2 = "abbbcccc";
         int cnt = 0;
         char temp = s2.charAt(0);
-        // while (i < s2.length()) {
-        //     if (temp == s2.charAt(i)) {
-        //         cnt++;
-        //     } else {
-        //         System.out.print(temp + "" + cnt);
-        //         temp = s2.charAt(i);
-        //         cnt = 1;
-        //     }
-        //     if(i==s2.length()-1){
-        //         System.out.print(temp + "" + cnt);
-        //     }
-        //     i++;
-        // }
+         while (i < s2.length()) {
+             if (temp == s2.charAt(i)) {
+                 cnt++;
+             } else {
+                 System.out.print(temp + "" + cnt);
+                 temp = s2.charAt(i);
+                 cnt = 1;
+             }
+             if(i==s2.length()-1){
+                 System.out.print(temp + "" + cnt);
+             }
+             i++;
+         }
 
-        for(i=0;i<s2.length();i++){
-            res+=s2.charAt(i);
-            j=1;
-            while(i+1<s2.length() && s2.charAt(i)==s2.charAt(i+1)){
-                i++;
-                j++;
-            }
-
-            res+=j+"";
-
-
-        }
+//        for(i=0;i<s2.length();i++){
+//            res+=s2.charAt(i);
+//            j=1;
+//            while(i+1<s2.length() && s2.charAt(i)==s2.charAt(i+1)){
+//                i++;
+//                j++;
+//            }
+//
+//            res+=j+"";
+//
+//
+//        }
         System.out.println(res);
 
     }

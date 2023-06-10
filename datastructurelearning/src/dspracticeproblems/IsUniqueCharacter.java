@@ -8,7 +8,6 @@ public class IsUniqueCharacter {
         boolean[] chars = new boolean[128];
         for(int i=0;i<value.length();i++){
             char c = value.toLowerCase().charAt(i);
-
             if(chars[c]){
                 return false;
             }
