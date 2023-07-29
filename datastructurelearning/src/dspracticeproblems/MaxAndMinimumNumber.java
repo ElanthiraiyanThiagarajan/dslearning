@@ -4,21 +4,21 @@ import java.util.Arrays;
 public class MaxAndMinimumNumber {
     public static void main(String[] args) {
         int[] arr = new int[] { 5, 7, 1, 3, 9 };
-        positiveMinAndMax(arr);
-        // int max = arr[0];
-        // int min = arr[0];
-        // for (var i = 1; i < arr.length; i++) {
-        // if (arr[i] > max) {
-        // max = arr[i];
-        // }
+        // positiveMinAndMax(arr);
+        int max = arr[0];
+        int min = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+        max = arr[i];
+        }
 
-        // if (arr[i] < min) {
-        // min = arr[i];
-        // }
-        // }
+        if (arr[i] < min) {
+        min = arr[i];
+        }
+        }
 
-        // System.out.println(max);
-        // System.out.println(min);
+        System.out.println(max);
+        System.out.println(min);
 
     }
 
