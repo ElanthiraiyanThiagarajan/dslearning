@@ -1,23 +1,42 @@
-package  dspracticeproblems;
+package dspracticeproblems;
+
 public class MissingNumber {
-    
-    static void missingNumber(int[] arr){
-        var sum = 0;
-        var sum2 = 0;
-        var lastNumber = arr[arr.length-1];
-
-        for(int i:arr){
-            sum+=i;
-        }
-
-        sum2 = lastNumber*(lastNumber+1)/2;
-
-        System.out.println(sum2-sum);
-
-
-    }
 
     public static void main(String[] args) {
-        missingNumber(new int[]{3,0,1});
+        int[] numbers = {1,2,3,4,5,7,8,9,10};
+//        System.out.println(missingNumber(numbers,numbers.length));
+        System.out.println(getMissingNumber(numbers,numbers.length));
+    }
+
+    static  Integer getMissingNumber(int[] numbers,int length) {
+        int sum = (length * (length + 1)) / 2;
+        int sum1 =0;
+//        int sum1 = ((length+2) * (length + 1)) / 2;
+        for (int i = 0; i < length; i++) {
+            sum1 += numbers[i];
+        }
+        return sum-sum1;
+    }
+
+    static Integer missingNumber(int[] numbers,int length) {
+        int i;
+        int[] temp = new int[length + 1];
+        for (i = 0; i <= length; i++) {
+            temp[i] = 0;
+        }
+        for (i = 0; i < length; i++) {
+            temp[numbers[i]-1] =1;
+        }
+
+        int ans=0;
+        for(i=0;i<=length;i++){
+            if(temp[i]==0){
+                ans=i+1;
+            }
+        }
+
+
+
+        return ans;
     }
 }

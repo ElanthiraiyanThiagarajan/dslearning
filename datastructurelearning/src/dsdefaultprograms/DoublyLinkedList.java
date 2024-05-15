@@ -70,7 +70,6 @@ public class DoublyLinkedList {
             while (lastNode.next != null) {
                 lastNode = lastNode.next;
             }
-
             lastNode.next = newnode;
             newnode.prev = lastNode;
             newnode.next = null;

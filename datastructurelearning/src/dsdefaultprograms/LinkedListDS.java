@@ -20,14 +20,11 @@ public class LinkedListDS {
         if (head == null) {
             head = newNode;
         } else {
-
             Node lastNode = head;
-
             while (lastNode.next != null) {
                 lastNode = lastNode.next;
             }
             lastNode.next = newNode;
-
         }
 
     }

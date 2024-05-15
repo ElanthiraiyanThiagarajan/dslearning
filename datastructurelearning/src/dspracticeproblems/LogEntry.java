@@ -2,20 +2,36 @@ package dspracticeproblems;
 
 public class LogEntry {
 
-    private String ipAddress;
-    private double pageLoadTime;
+    private String ip;
 
-    public LogEntry(String ipAddress, double pageLoadTime) {
-        this.ipAddress = ipAddress;
+    private Double pageLoadTime;
+
+    public LogEntry(String ip, Double pageLoadTime) {
+        this.ip = ip;
         this.pageLoadTime = pageLoadTime;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
+    public String getIp() {
+        return ip;
     }
 
-    public double getPageLoadTime() {
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Double getPageLoadTime() {
         return pageLoadTime;
     }
-    
+
+    public void setPageLoadTime(Double pageLoadTime) {
+        this.pageLoadTime = pageLoadTime;
+    }
+
+    @Override
+    public String toString() {
+        return "LogEntry{" +
+                "ip='" + ip + '\'' +
+                ", pageLoadTime=" + pageLoadTime +
+                '}';
+    }
 }

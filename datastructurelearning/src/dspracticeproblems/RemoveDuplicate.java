@@ -1,33 +1,30 @@
-package  dspracticeproblems;
+package dspracticeproblems;
+
 public class RemoveDuplicate {
 
-    private static int removeDuplicates(int a[], int n) {
-        if (n == 0 || n == 1) {
-            return n;
-        }
-        int j = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if (a[i] != a[i + 1]) {
-                a[j++] = a[i];
+    static int removeDuplicate(int[] nums){
+        int j=1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                nums[j]=nums[i];
+                j++;
             }
         }
 
-        a[j++] = a[n - 1];
         return j;
-
     }
 
-    public static int[] removeDuplicates(int[] arr) {
-        int result = removeDuplicates(arr, arr.length);
-        int[] newArray = new int[result];
-        for (int i = 0; i < result; i++) {
-            newArray[i] = arr[i];
+    static int removeDuplicate2(int[] nums){
+        int j=1;
+        for(int i=1;i<nums.length;i++){
+            if(j==1|| nums[i]!=nums[j-2]){
+                nums[j++]=nums[i];
+            }
         }
-        return newArray;
+        return j;
     }
 
     public static void main(String[] args) {
-        removeDuplicates(new int[] { 1, 1, 2, 2, 3, 4, 5 });
+        System.out.println(removeDuplicate2(new int[]{1,1,1,2,2,3}));
     }
-
 }

@@ -1,79 +1,62 @@
 package dspracticeproblems;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LogParser {
 
-    private List<LogEntry> logEntries;
+    private List<LogEntry> logEntryList;
 
-    public LogParser(List<String> rawData) {
-        this.logEntries = parseData(rawData);
+    public LogParser(List<String> logList) {
+        this.logEntryList = parseData(logList);
     }
 
-    private List<LogEntry> parseData(List<String> rawData) {
-        List<LogEntry> entries = new ArrayList<>();
-        for (String data : rawData) {
-            Map<String, String> keyValuePairs = parseKeyValuePairs(data);
-            String ipAddress = keyValuePairs.get("ip");
-            double pageLoadTime = Double.parseDouble(keyValuePairs.get("PageLoadTime"));
-            entries.add(new LogEntry(ipAddress, pageLoadTime));
+    private List<LogEntry> parseData(List<String> logList) {
+        List<LogEntry> logEntryList = new ArrayList<>();
+        for (String log : logList) {
+            Map<String, String> dateMap = splitData(log);
+            logEntryList.add(new LogEntry(dateMap.get("ip"), Double.valueOf(dateMap.get("PageLoadTime"))));
         }
-        return entries;
+        return logEntryList;
     }
 
-    private Map<String, String> parseKeyValuePairs(String data) {
-        Map<String, String> keyValuePairs = new HashMap<>();
-        String[] pairs = data.split("\\$#\\$|~\\$~");
-        for (String pair : pairs) {
-            if (pair.contains("ip") || pair.contains("PageLoadTime")) {
-                String[] keyValue = pair.split("#\\$#", 2);
-                if (keyValue.length == 2) {
-                    String key = keyValue[0].trim();
-                    String value = keyValue[1].trim();
-                    keyValuePairs.put(key, value);
-                }
+    private Map<String, String> splitData(String data) {
+        Map<String, String> dateMap = new HashMap<>();
+        String[] splitData = data.split("~\\$~|\\$#\\$");
+        for (String split : splitData) {
+            String[] splitData2 = split.split("#\\$#");
+            if (splitData2.length == 2) {
+                dateMap.put(splitData2[0].trim(), splitData2[1].trim());
             }
-
         }
-        return keyValuePairs;
+        return dateMap;
     }
 
-    public void printUniqueIPAddresses() {
-        Set<String> uniqueIPs = new TreeSet<>();
-        for (LogEntry entry : logEntries) {
-            uniqueIPs.add(entry.getIpAddress());
-        }
-        System.out.println("1. Unique number of IP addresses: " + uniqueIPs.size());
+    public void uniqueIp() {
+        System.out.println("1. Unique number of IP addresses: " + logEntryList.stream().map(LogEntry::getIp).distinct().toList().size());
     }
 
-    public void printAveragePageLoadTimeByIP() {
+    public void findAverage() {
         Map<String, List<Double>> ipToPageLoadTimes = new TreeMap<>();
-        for (LogEntry entry : logEntries) {
-            ipToPageLoadTimes.computeIfAbsent(entry.getIpAddress(), k -> new ArrayList<>())
-                    .add(entry.getPageLoadTime());
+        for (LogEntry logEntry : logEntryList) {
+            ipToPageLoadTimes.computeIfAbsent(logEntry.getIp(), k -> new ArrayList<>()).add(logEntry.getPageLoadTime());
         }
-
-        System.out.println("2. Average page load time (grouped by IP address):");
-        for (Map.Entry<String, List<Double>> entry : ipToPageLoadTimes.entrySet()) {
-            String ipAddress = entry.getKey();
-            List<Double> pageLoadTimes = entry.getValue();
-            double average = calculateAverage(pageLoadTimes);
-            System.out.println(ipAddress + ": " + average);
-        }
+        ipToPageLoadTimes.forEach((key, value) -> {
+            System.out.println(key + ": " + calculateAverage(value));
+        });
     }
 
-    private double calculateAverage(List<Double> values) {
-        double sum = 0;
-        for (double value : values) {
-            sum += value;
-        }
-        return sum / values.size();
+    private double calculateAverage(List<Double> pageLoadTimes) {
+//        return pageLoadTimes.stream().mapToDouble(Double::doubleValue).average().getAsDouble();
+        double sum = pageLoadTimes.stream().mapToDouble(Double::doubleValue).sum();
+        return sum / pageLoadTimes.size();
     }
 
+
+    public List<LogEntry> getLogEntryList() {
+        return logEntryList;
+    }
+
+    public void setLogEntryList(List<LogEntry> logEntryList) {
+        this.logEntryList = logEntryList;
+    }
 }
