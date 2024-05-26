@@ -1,6 +1,6 @@
 package util;
 
-public class DataStructureUTIL {
+public class DataStructureUTIL<T> {
 
     public static <T> void printArray(T[] arr) {
         for (T t : arr) {
