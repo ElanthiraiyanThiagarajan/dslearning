@@ -37,7 +37,7 @@ public class Stopwatch {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        int n = Integer.parseInt(args[0]);
+        int n = 10;
 
         Stopwatch timer1 = new Stopwatch();
 

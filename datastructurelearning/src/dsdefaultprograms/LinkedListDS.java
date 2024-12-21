@@ -8,7 +8,6 @@ public class LinkedListDS {
         Node newNode = new Node();
         newNode.data = val;
         newNode.next = head;
-
         head = newNode;
 
     }
